@@ -21,18 +21,20 @@ function App() {
         const styles = input.replaceAll('\n', '').split(';').filter(n => n);
 
         styles.map((style) => {
-            if (style.split(':').length == 1) return;
+            if (style.split(':').length === 1) return 0;
 
             let key = style.split(':')[0].trim();
             const value = style.split(':')[1].trim();
 
             key = key.split('-').map((keyDatum, keyDatumIndex) => {
-                if (keyDatumIndex == 0) return keyDatum;
+                if (keyDatumIndex === 0) return keyDatum;
                 return keyDatum.charAt(0).toUpperCase() + keyDatum.slice(1);
             }).join('');
 
             const object = JSON.parse('{"' + key + '":"' + value + '"}')
             output = {...output, ...object}
+
+            return 0;
         });
 
         return output;
